@@ -1,0 +1,51 @@
+<header class="menu-bar">
+  <app-nav-bar></app-nav-bar>
+</header>
+<section class="profile-section">
+  <main class = "content">
+    <section class="profile-navigation">
+      <div class="profile-nav-bar-item">
+        <button *ngIf="isCurrentUserProfile" class="navigation-button public-posts"  (click)="onNavButtonClick('Public')">Public posts</button>
+        <button *ngIf="isCurrentUserProfile" class="navigation-button private-posts" (click)="onNavButtonClick('Private')">Private posts</button>
+      </div>
+    </section>
+    <div class = "profile-center">
+      <div class="profile-image">
+        <img [src]="profileImageSrc" alt="Profile image" class="profile-image-element" />
+      </div>
+    </div>
+    <section class="profile-navigation">
+      <div class = "profile-nav-bar-item">
+        <button *ngIf="isCurrentUserProfile" class="navigation-button saved" (click)="onNavButtonClick('Liked')">Liked</button>
+        <button *ngIf="isCurrentUserProfile" class="navigation-button edit-profile" (click)="onNavButtonClick('Edit')">Edit profile</button>
+      </div>
+    </section>
+  </main>
+  <header class="profile-info">
+    <h2 class="username"> {{ profileUsername }} </h2>
+    <p class="profile-description">{{ profileDescription }}</p>
+  </header>
+  <section class="filter-section">
+    <div class="filter-nav">
+      <div class="filter-label">
+        <header class="filter-header">Filter</header>
+        <button (click)="onFilterClick()" class="filter-button">
+          <img src="{{filterIconSrc}}" alt="Filter" class="filter-icon"/>
+        </button>
+      </div>
+      <h2 class="filter-name" *ngIf="filterName">{{ filterName }}</h2>
+    </div>
+    <div *ngIf="showCategoryList" class="category-list">
+      <ul>
+        <li (click)="onCategorySelected('All')">All</li>
+        <li *ngFor="let category of categories" (click)="onCategorySelected(category)">{{ category }}</li>
+      </ul>
+    </div>
+  </section>
+  <main class="content-wrapper">
+    <article *ngFor="let postImage  of postImages" (click)="onImageArticleClick(postImage.postId, postImage.url)" class="image-article">
+      <img [src]="postImage.url" alt="Post image" class="article-image"/>
+    </article>
+  </main>
+</section>
+

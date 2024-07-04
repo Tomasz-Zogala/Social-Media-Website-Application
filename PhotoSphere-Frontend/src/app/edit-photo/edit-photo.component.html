@@ -1,0 +1,45 @@
+<header class="menu-bar">
+  <app-nav-bar></app-nav-bar>
+</header>
+<div class="style">
+  <main class="photo-container">
+    <section class="photo-header">
+      <div class="new-photo-container">
+        <header class="new-photo-header">
+          <div class="new-photo-placeholder" is="photo-placeholder">
+            <img *ngIf="editedPhoto" [src]="editedPhoto" alt="Selected Photo" class="photo-preview">
+          </div>
+          <label class="label-privacy">Do you want everyone to see your photo?</label>
+        </header>
+      </div>
+      <form class="edit-photo-form" #editPhotoForm="ngForm" (ngSubmit)="onEditPost(editPhotoForm)">
+        <div class="form-group">
+          <label for="title" class="label-name">Title</label>
+          <input type="text" id="title" name="Title" class="input-field" [(ngModel)]="post.caption" required />
+        </div>
+        <div class="form-group">
+          <label for="description" class="label-name">Description</label>
+          <textarea id="description" name="description" class="description-field" [(ngModel)]="post.description" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="category" class="label-name">Category</label>
+          <input type="text" id="category" name="category" class="input-field" [(ngModel)]="post.category" required />
+        </div>
+        <div class="form-group visibility-options">
+          <div class="visibility-inputs">
+            <label for="private" class="visibility-label">
+              <input type="radio" id="private" name="visibility" [(ngModel)]="post.private" [value]="true" /> Private
+            </label>
+            <label for="public" class="visibility-label">
+              <input type="radio" id="public" name="visibility" [(ngModel)]="post.private" [value]="false" /> Public
+            </label>
+          </div>
+        </div>
+        <div class="button-container">
+          <button type="submit" class="save-button">SAVE CHANGES</button>
+          <button type="button" class="save-button delete" tabindex="0" (click)="onDeletePost()">DELETE YOUR POST</button>
+        </div>
+      </form>
+    </section>
+  </main>
+</div>
